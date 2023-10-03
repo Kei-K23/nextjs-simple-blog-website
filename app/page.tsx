@@ -1,6 +1,8 @@
-import { prisma } from "@/db";
 import BlogListContainer from "./components/BlogListContainer";
 import getBlogs from "@/lib/getBlogs";
+import Form from "./components/Form";
+
+export const revalidate = 60; // revalidate at most every hour
 
 export default async function Home() {
   const blogs = await getBlogs({
@@ -24,6 +26,7 @@ export default async function Home() {
       </h2>
 
       <BlogListContainer blogLists={blogs} />
+      <Form />
     </main>
   );
 }

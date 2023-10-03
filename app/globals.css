@@ -19,4 +19,8 @@ body {
   .page-padding {
     @apply p-4 sm:px-16 md:px-20 lg:px-28 lg:py-4
   }
+
+  .width {
+    @apply w-full md:w-[80%] lg:w-[65%] xl:w-[55%] 2xl:w-[50%] p-4 md:px-8 lg:px-10 lg:py-5
+  }
 }
