@@ -1,18 +1,14 @@
 import { prisma } from "@/db";
-import PostListContainer from "./components/PostListContainer";
-
-async function getBlogs() {
-  return await prisma.blog.create({
-    data: {
-      title: "This is title",
-      body: "This is body",
-      authorName: "Arkarmin",
-    },
-  });
-}
+import BlogListContainer from "./components/BlogListContainer";
+import getBlogs from "@/lib/getBlogs";
 
 export default async function Home() {
-  const blogs = await prisma.blog.findMany();
+  const blogs = await getBlogs({
+    retrieve: {
+      retrieveKeyWord: "latestBlogs",
+    },
+  });
+
   return (
     <main className="page-padding mt-4">
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
@@ -27,7 +23,7 @@ export default async function Home() {
         <span className="text-sky-600">Writer</span>
       </h2>
 
-      <PostListContainer />
+      <BlogListContainer blogLists={blogs} />
     </main>
   );
 }
