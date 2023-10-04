@@ -33,7 +33,26 @@ body {
     background: rgba(0, 0, 0, 0.8);
   }
 
+  .flex-center {
+    @apply flex justify-center items-center flex-col
+  }
+
+
   .text-input {
     @apply text-slate-200 p-2 px-4 text-lg bg-slate-700 focus:border-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-600 rounded-lg
+  }
+
+  .left-tol {
+    position: absolute;
+    top: 50%;
+    left: -160%;
+    transform: translateY(-50%);
+  }
+
+  .right-tol {
+    position: absolute;
+    top: 50%;
+    right: -180%;
+    transform: translateY(-50%);
   }
 }

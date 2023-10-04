@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Form from "../components/Form";
+import { addNewBlog } from "../actions";
 
 export const metadata: Metadata = {
   title: "Add blog",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 const AddBlog = () => {
   return (
     <div className="page-padding">
-      <Form />
+      <Form actionType={addNewBlog} buttonText="Write blog" />
     </div>
   );
 };

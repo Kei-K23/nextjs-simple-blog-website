@@ -32,7 +32,7 @@ export default async function Home() {
         <NavLinkBtnContainer />
       </section>
 
-      <section>
+      <section className="mt-10">
         <h3 className="text-center text-xl md:text-3xl font-extrabold">
           Latest Blogs
         </h3>
