@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { WriteIcon } from "./WriteIcon";
+import { WriteIcon } from "./motion/WriteIcon";
 const Navbar = () => {
   return (
     <header className="page-padding shadow-xl shadow-slate-900  ">
@@ -8,7 +8,9 @@ const Navbar = () => {
         <Link href={"/"} className="font-bold hover:text-sky-600">
           Writer
         </Link>
-        <WriteIcon />
+        <Link href={"/add_blog"}>
+          <WriteIcon />
+        </Link>
       </nav>
     </header>
   );

@@ -11,7 +11,9 @@ const getBlogs = async ({ retrieve }: Props) => {
   switch (retrieve.retrieveKeyWord) {
     //find all
     case "all":
-      return await prisma.blog.findMany();
+      return await prisma.blog.findMany({
+        orderBy: { createdAt: "desc" },
+      });
     //find with id
     case "findWithID":
       return await prisma.blog.findUnique({
