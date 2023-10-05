@@ -1,8 +1,7 @@
 import BlogListContainer from "./components/BlogListContainer";
 import getBlogs from "@/lib/getBlogs";
 import NavLinkBtnContainer from "./components/NavLinkBtnContainer";
-import { prisma } from "@/db";
-
+import { cookies } from "next/headers";
 //revalidate the data
 export const revalidate = 0;
 
