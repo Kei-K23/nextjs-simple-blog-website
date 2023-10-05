@@ -3,7 +3,7 @@ import getBlogs from "@/lib/getBlogs";
 import NavLinkBtnContainer from "./components/NavLinkBtnContainer";
 
 //revalidate the data
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function Home() {
   const blogs = await getBlogs({

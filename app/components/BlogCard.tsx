@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import EllipsisIcon from "./motion/EllipsisIcon";
 import BackDrop from "./BackDrop";
@@ -17,13 +16,21 @@ type Props = {
     createdAt: Date;
     updatedAt: Date;
   };
+  isShowSetting: string;
+  setIsShowSetting: (value: React.SetStateAction<string>) => void;
+  isEdit: boolean;
+  setIsEdit: (value: React.SetStateAction<boolean>) => void;
 };
 
-const BlogCard = ({ blog }: Props) => {
-  const [isShowSetting, setIsShowSetting] = useState("");
-  const [isEdit, setIsEdit] = useState(false);
+const BlogCard = ({
+  blog,
+  isShowSetting,
+  setIsShowSetting,
+  isEdit,
+  setIsEdit,
+}: Props) => {
   const handleShowSetting = (id: string) => {
-    setIsShowSetting((prev) => (prev = id));
+    setIsShowSetting(id);
   };
 
   const handleHideShowSetting = () => {
@@ -36,8 +43,10 @@ const BlogCard = ({ blog }: Props) => {
 
   return (
     <>
-      {isEdit ? (
+      {isEdit && blog.id === isShowSetting ? (
         <Form
+          setIsShowSetting={setIsShowSetting}
+          setIsEdit={setIsEdit}
           isEditBlog={true}
           actionType={editBlog}
           buttonText="Edit"
@@ -99,7 +108,7 @@ const BlogCard = ({ blog }: Props) => {
           <h2 className=" text-sky-600 break-words text-2xl font-bold">
             {blog.title}
           </h2>
-          {isShowSetting ? (
+          {blog.id === isShowSetting ? (
             <CloseBtn onClick={() => handleHideShowSetting()} />
           ) : (
             <EllipsisIcon onClick={() => handleShowSetting(blog.id)} />

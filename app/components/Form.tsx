@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
 
-import { useState, useRef } from "react";
+import { useState, FormEvent } from "react";
 
 type Props = {
   actionType: (formData: FormData) => Promise<void>;
+  setIsEdit?: (value: React.SetStateAction<boolean>) => void;
+  setIsShowSetting?: (value: React.SetStateAction<string>) => void;
   isEditBlog?: boolean;
   prevValue?: {
     id?: string;
@@ -17,8 +18,14 @@ type Props = {
   buttonText: string;
 };
 
-const Form = ({ actionType, isEditBlog, buttonText, prevValue }: Props) => {
-  const formRef = useRef<HTMLFormElement>(null);
+const Form = ({
+  actionType,
+  setIsEdit,
+  setIsShowSetting,
+  buttonText,
+  prevValue,
+}: Props) => {
+  // const formRef = useRef<HTMLFormElement>(null);
 
   const [blogData, setBlogData] = useState({
     title: prevValue?.title || "",
@@ -26,19 +33,19 @@ const Form = ({ actionType, isEditBlog, buttonText, prevValue }: Props) => {
     body: prevValue?.body || "",
   });
 
-  const handleClear = () => {
-    if (isEditBlog) {
-      window.location.reload();
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.currentTarget.reset();
+    if (setIsEdit && setIsShowSetting) {
+      setIsEdit((prev) => (prev = false));
+      setIsShowSetting((prev) => (prev = ""));
     }
-    return;
   };
-
   return (
     <>
       <form
         action={actionType}
         className="mx-auto width flex flex-col justify-start gap-4 shadow-xl shadow-slate-900 ring-2 ring-slate-500 "
-        ref={formRef}
+        onSubmit={handleSubmit}
       >
         <div className="flex flex-col justify-start gap-2">
           <label htmlFor="title">Title:</label>
@@ -109,7 +116,6 @@ const Form = ({ actionType, isEditBlog, buttonText, prevValue }: Props) => {
             className="border-2 rounded-md border-slate-600 p-2 font-bold text-lg shadow-lg shadow-slate-900 hover:bg-slate-500 active:bg-slate-600"
             type="submit"
             title="add blog"
-            onClick={handleClear}
           >
             {buttonText}
           </motion.button>
